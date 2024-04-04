@@ -1,16 +1,12 @@
 {
-    "npm.packageManager": "bun",
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "npm.packageManager": "pnpm",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-    
-    "eslint.experimental.useFlatConfig": true,
-    "eslint.runtime": "bun",
-    "eslint.execArgv": ["--bun"],
-    "eslint.trace.server": "messages",
-    "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.trace.server": "messages",
+  "eslint.workingDirectories": [{ "mode": "auto" }],
 
-
-    "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit"
-    }
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  }
 }

@@ -1,10 +1,10 @@
 {
-    "recommendations": [
-        "ms-vscode.vscode-typescript-next",
-        "ms-python.vscode-pylance",
-        "ms-python.python",
-        "ms-python.debugpy",
-        "charliermarsh.ruff",
-        "oven.bun-vscode"
-    ]
+  "recommendations": [
+    "ms-vscode.vscode-typescript-next",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "charliermarsh.ruff",
+    "esbenp.prettier-vscode"
+  ]
 }
