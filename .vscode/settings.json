@@ -1,0 +1,16 @@
+{
+    "npm.packageManager": "bun",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+
+    
+    "eslint.experimental.useFlatConfig": true,
+    "eslint.runtime": "bun",
+    "eslint.execArgv": ["--bun"],
+    "eslint.trace.server": "messages",
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    }
+}

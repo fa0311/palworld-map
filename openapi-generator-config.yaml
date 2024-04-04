@@ -1,0 +1,10 @@
+inputSpec: https://raw.githubusercontent.com/fa0311/palworld-openapi/main/src/openapi/openapi-3.0.yaml
+outputDir: ./palworld_openapi
+npmName: palworld-openapi
+npmVersion: 0.0.0
+
+# withoutRuntimeChecks: false
+legacyDiscriminatorBehavior: false
+# modelPropertyNaming: original
+# stringEnums: true
+# paramNaming: original
