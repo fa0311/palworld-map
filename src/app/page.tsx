@@ -19,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     getPlayers();
-    const interval = setInterval(getPlayers, 5000);
+    const interval = setInterval(getPlayers, 1000);
     return () => clearInterval(interval);
   }, []);
 

@@ -3,7 +3,7 @@ import { Configuration, InfoApi } from "palworld-openapi";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const config = new Configuration({
-    fetchApi: (x, y) => fetch(x, { ...y, next: { revalidate: 5 } }),
+    fetchApi: (x, y) => fetch(x, { ...y, next: { revalidate: 0.8 } }),
     basePath: "http://192.168.11.20:8212",
     username: "admin",
     password: "1",
