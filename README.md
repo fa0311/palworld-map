@@ -8,6 +8,11 @@
 ```sh
 $ vi .env
 ```
+```env
+BASE_PATH=http://192.168.11.20:8212
+USERNAME=admin
+PASSWORD=1
+```
 
 ## Setup
 
