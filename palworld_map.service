@@ -1,0 +1,21 @@
+[Unit]
+Description=Palworld map server
+Wants=network-online.target
+
+After=syslog.target network.target nss-lookup.target network-online.target palworld.service
+
+[Service]
+ExecStart=/usr/local/bin/pnpm run start
+
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s INT $MAINPID
+
+User=steam
+Group=steam
+StandardOutput=journal
+Restart=on-failure
+WorkingDirectory=/home/steam/palworld-ma
+
+
+[Install]
+WantedBy=multi-user.target
