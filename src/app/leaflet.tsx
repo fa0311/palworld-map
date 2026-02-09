@@ -3,18 +3,18 @@ import { Player } from "palworld-openapi";
 import { useEffect, useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
-const toGamePossition = (x: number, y: number) => {
-  const ratio = 458.355;
-  const signX = x > 0 ? 0 : 1;
-  const signY = y > 0 ? 0 : 1;
-  const gameX = x / ratio;
-  const gameY = y / ratio;
-  return [gameX + signX, gameY + signY] as [number, number];
+const toGamePos = (x: number, y: number) => {
+  const ratio = 459;
+  const transl_x = 123888
+  const transl_y = -158000
+  const gameX = x + transl_x;
+  const gameY = y + transl_y;
+  return [gameX / ratio, gameY / ratio] as [number, number];
 };
 
-const toMakerPossition = (x: number, y: number) => {
+const toMakerPos = (x: number, y: number) => {
   const size = 256;
-  const mapRatio = 7.8;
+  const mapRatio = 15.6;
   const signX = x > 0 ? 0 : 1;
   const signY = y > 0 ? 0 : 1;
   const makerX = (x - signX) / mapRatio - size / 2;
@@ -22,9 +22,9 @@ const toMakerPossition = (x: number, y: number) => {
   return [makerX, makerY] as [number, number];
 };
 
-const fromPinPossition = (pin: PinData): PinData => {
-  const scale = 11;
-  const data = toMakerPossition(pin.loc[0] * scale, pin.loc[1] * scale);
+const fromPinPos = (pin: PinData): PinData => {
+  const [gameX, gameY] = toGamePos(pin.loc[0], pin.loc[1]);
+  const data = toMakerPos(gameX, gameY);
   return {
     ...pin,
     loc: data,
@@ -41,10 +41,7 @@ type PinData = {
   loc: [number, number];
   type: string;
   name: string;
-  pinImage: string;
-  articleUrl: string;
   overrideIcon: string;
-  originalID: string;
 };
 
 export const Leaflet = ({ players }: TileLayerProps) => {
@@ -52,27 +49,25 @@ export const Leaflet = ({ players }: TileLayerProps) => {
   const fieldBossData = useMemo(() => {
     return pinData
       .filter((pin) => pin.type === "fieldboss")
-      .map(fromPinPossition);
+      .map(fromPinPos);
   }, [pinData]);
   const fasttravelData = useMemo(() => {
     return pinData
       .filter((pin) => pin.type === "fasttravel")
-      .map(fromPinPossition);
+      .map(fromPinPos);
   }, [pinData]);
   const ore = useMemo(() => {
     return pinData
       .filter((pin) => ["coal", "metal", "quartz", "suflur"].includes(pin.type))
-      .map(fromPinPossition);
+      .map(fromPinPos);
   }, [pinData]);
 
   const dungeon = useMemo(() => {
     return pinData
       .filter((pin) => pin.type === "dungeon")
-      .map(fromPinPossition);
+      .map(fromPinPos);
   }, [pinData]);
 
-  const originX = 122500;
-  const originY = -158100;
   const size = 256;
 
   const getPinData = async () => {
@@ -112,19 +107,19 @@ export const Leaflet = ({ players }: TileLayerProps) => {
         ]}
       />
       {players.map((player, key) => {
-        const [gameX, gameY] = toGamePossition(
-          player.locationX + originX,
-          player.locationY + originY
+        const [gameX, gameY] = toGamePos(
+          player.locationX,
+          player.locationY
         );
 
-        const [makerX, makerY] = toMakerPossition(gameX, gameY);
+        const [makerX, makerY] = toMakerPos(gameX, gameY);
         return (
           <Marker key={key} position={[makerX, makerY]}>
             <Popup>
               <div>
-                <h2>{player.name}</h2>
-                <p>{gameX}</p>
+                <h2>{player.name} - lvl {player.level}</h2>
                 <p>{gameY}</p>
+                <p>{gameX}</p>
               </div>
             </Popup>
           </Marker>
